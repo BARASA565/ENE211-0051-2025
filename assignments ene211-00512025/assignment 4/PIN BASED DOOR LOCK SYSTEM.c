@@ -1,90 +1,74 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int main()
 {
+    const int correctpin=1234;
+    int attempts=3;
     int pin;
-    int correctPin = 1234;
-    int attempts = 3;
     int choice;
 
-    while (attempts > 0)
+   do
+   {
+    printf("\nPLEASE ENTER YOUR PIN:");
+    scanf("%d", &pin);
+
+    if (pin > 9999)
     {
-        printf("Enter 4-digit PIN: ");
-        scanf("%d", &pin);
-
-        // Validate PIN length //
-        if (pin < 1000)
-        {
-            printf("PIN is too short (must be 4 digits)\n");
-        }
-        else if (pin > 9999)
-        {
-            printf("PIN is too long (must be 4 digits)\n");
-        }
-        else
-        {
-            printf("PIN is exactly 4 digits\n");
-
-            // Check if PIN is correct //
-        if (pin == correctPin)
-            {
-                printf("\nAccess Granted!\n");
-
-                printf("\n=== Device Menu ===\n");
-                printf("1. Open Door\n");
-                printf("2. Change Username\n");
-                printf("3. Change PIN\n");
-                printf("4. Exit\n");
-
-                printf("Enter your choice: ");
-                scanf("%d", &choice);
-
-        switch (choice)
-                {
-                    case 1:
-                        printf("Access granted. Door unlocked.\n");
-                        break;
-
-                    case 2:
-                        printf("Change username feature coming soon.\n");
-                        break;
-
-                    case 3:
-                        printf("Change PIN feature coming soon.\n");
-                        break;
-
-                    case 4:
-                        printf("Exiting system.\n");
-                        break;
-
-                    default:
-                        printf("Invalid option! Please try again.\n");
-                }
-
-        return 0;
-            }
-            else
-            {
-                attempts--;
-
-                if (attempts > 0)
-                {
-                    printf("Incorrect PIN! Remaining attempts: %d\n",
-                           attempts);
-                }
+        printf("PIN IS TOO LONG (PIN IS EXACTLY 4 DIGITS)");
     }
-    }
-    }
-
-    // Lockout after 3 attempts //
-    printf("\nSystem locked! Wait for 5 seconds...\n");
-
-    for (int i = 5; i >= 1; i--)
+    else if (pin < 999)
     {
-        printf("%d...\n", i);
+        printf("PIN IS TOO SHORT (PIN IS EXACTLY 4 DIGITS)");
     }
+    else
+    {
+       printf("PIN IS EXACTLY 4 DIGITS\n");
+       if(pin!=correctpin)
+       {
+           attempts--;
+           printf("%d attempts remaining",attempts);
+       }
+    }
+   }
 
-    printf("You can try again now.\n");
+   while(pin!=correctpin&&attempts>0);
+
+   if(pin!=correctpin)
+{
+    printf("\nToo many attempts.system locked,wait for 5 secs...");
+    for(int i=5;i>0;i--)
+        printf("\n%d\n",i);
+}
+
+else
+{
+     printf("ACCESS GRANTED");
+     printf("\n===DEVICE MENU===\n");
+     printf("1.OPEN DOOR\n");
+     printf("2.CHANGE USERNAME\n");
+     printf("3.CHANGE PIN\n");
+     printf("4.EXIT\n");
+     printf("CHOOSE YOUR OPTION:");
+     scanf("%d",&choice);
+    }
+    switch(choice)
+    {
+    case 1:
+        printf("DOOR IS ALREADY OPEN.\n");
+        break;
+    case 2:
+        printf("COMING SOON.\n");
+        break;
+    case 3:
+        printf("COMING SOON.\n");
+        break;
+    case 4:
+        printf("EXITING SYSTEM.\n");
+        break;
+    default:
+        printf("INVALID OPTION!PLEASE TRY AGAIN.");
+    }
 
     return 0;
 }
